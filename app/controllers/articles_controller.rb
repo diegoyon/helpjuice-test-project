@@ -1,13 +1,24 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[ show edit update destroy ]
 
+  require 'string/similarity'
   # GET /articles or /articles.json
   def index
     # @articles = Article.all
 
-    # For the use of the search bar
-    @q = Article.ransack(params[:q])
-    @articles = @q.result(distinct: true)
+    if params[:query].present?
+      @articles = Article.where("title LIKE ?", "#{params[:query]}%")
+    
+      create_query(params[:query]);
+    else
+      @articles = Article.all
+    end
+
+    if turbo_frame_request?
+      render partial: "articles", locals: { articles: @articles }
+    else
+      render :index
+    end
   end
 
   # GET /articles/1 or /articles/1.json
@@ -70,5 +81,16 @@ class ArticlesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def article_params
       params.require(:article).permit(:title, :content, :author)
+    end
+
+    def create_query(query)
+      return unless query.length >= 3
+      last_query = Query.last
+      similarity = String::Similarity.cosine last_query.body, query
+      if similarity > 0.7
+        last_query.update(body: query)
+      else
+        Query.create!(body: query)
+      end
     end
 end

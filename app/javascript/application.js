@@ -3,21 +3,30 @@ import '@hotwired/turbo-rails';
 import 'controllers';
 
 // code
-let searchBar = document.getElementById('search-bar');
-let searchButton = document.getElementById('search-button');
-// console.log(searchBar);
-searchBar.addEventListener('input', filterList);
+// let searchBar = document.getElementById('search-bar');
+// let searchButton = document.getElementById('search-button');
+// // console.log(searchBar);
+// searchBar.addEventListener('input', filterList);
+// searchBar.addEventListener('input', storeInput);
+// let timeDelay;
 
-function filterList() {
-  const filter = searchBar.value.toLowerCase();
-  const listItems = document.querySelectorAll('.article-item');
+// function filterList() {
+//   const filter = searchBar.value.toLowerCase();
+//   const listItems = document.querySelectorAll('.article-item');
 
-  listItems.forEach((item) => {
-    let text = item.textContent;
-    if (text.toLowerCase().includes(filter.toLowerCase())) {
-      item.style.display = '';
-    } else {
-      item.style.display = 'none';
-    }
-  });
-}
+//   listItems.forEach((item) => {
+//     let text = item.textContent;
+//     if (text.toLowerCase().includes(filter.toLowerCase())) {
+//       item.style.display = '';
+//     } else {
+//       item.style.display = 'none';
+//     }
+//   });
+// }
+
+// function storeInput() {
+//   window.clearTimeout(timeDelay);
+//   timeDelay = window.setTimeout(() => {
+//     console.log(searchBar.value);
+//   }, 3000);
+// }
