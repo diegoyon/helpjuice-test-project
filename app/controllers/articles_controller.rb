@@ -1,7 +1,5 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!
-
 
   require 'string/similarity'
   # GET /articles or /articles.json
@@ -89,13 +87,13 @@ class ArticlesController < ApplicationController
       if Query.last
         last_query = Query.last
       else
-        last_query = Query.create!(body: query)
+        last_query = Query.create!(body: query, user_id: current_user.id)
       end
       similarity = String::Similarity.cosine last_query.body, query
       if similarity > 0.7
         last_query.update(body: query)
       else
-        Query.create!(body: query)
+        Query.create!(body: query, user_id: current_user.id)
       end
     end
 end
