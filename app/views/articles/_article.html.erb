@@ -1,17 +1,12 @@
-<div class="article-item" id="<%= dom_id article %>">
-  <p>
-    <strong>Title:</strong>
-    <%= article.title %>
-  </p>
+<div class="article-item container bg-body-secondary p-3 rounded mb-3" id="<%= dom_id article %>">
+    
+  <h2 class="mb-0"><%= article.title %></h2>
+  <p class="fst-italic">by <%= article.author %></p>
 
-  <p>
-    <strong>Content:</strong>
+  <p class="fs-5">
     <%= article.content %>
   </p>
 
-  <p>
-    <strong>Author:</strong>
-    <%= article.author %>
-  </p>
+  
 
 </div>
