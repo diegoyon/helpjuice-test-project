@@ -6,17 +6,17 @@
 
   <%# # Search if the name field contains... %>
   <%#= f.label :title_or_content_or_author_cont %>
-  <%= f.search_field :title_or_content_or_author_cont %>
+  <%= f.search_field :title_or_content_or_author_cont, id: "search-bar" %>
 
-  <%= f.submit %>
+  <%= f.submit 'Search', id: "search-button" %>
 <% end %>
 
 <div id="articles">
   <% @articles.each do |article| %>
     <%= render article %>
-    <p>
-      <%= link_to "Show this article", article %>
-    </p>
+    <%# <p> %>
+      <%#= link_to "Show this article", article %>
+    <%# </p> %>
   <% end %>
 </div>
 
