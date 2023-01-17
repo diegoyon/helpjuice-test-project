@@ -8,7 +8,7 @@ class ArticlesController < ApplicationController
 
     if params[:query].present?
       @articles = Article.where("lower(title) LIKE ?", "%#{params[:query].downcase}%") + Article.where("lower(content) LIKE ?", "%#{params[:query].downcase}%") + Article.where("lower(author) LIKE ?", "%#{params[:query].downcase}%")
-      create_query(params[:query]);
+      create_query(params[:query].downcase);
     else
       @articles = Article.all
     end
@@ -39,7 +39,7 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
-        format.html { redirect_to article_url(@article), notice: "Article was successfully created." }
+        format.html { redirect_to articles_url, notice: "Article was successfully created." }
         format.json { render :show, status: :created, location: @article }
       else
         format.html { render :new, status: :unprocessable_entity }
