@@ -1,24 +1,47 @@
-# README
+# Search Analytics
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> This is a web application where the user can use the search bar to look for an article. The user can see results in real-time when typing. The app will store all user's queries and display analytics to see what the user is searching the most.
 
-Things you may want to cover:
+## Built With
 
-* Ruby version
+- Ruby on Rails
+- Postgres SQL
+- Bootstrap
 
-* System dependencies
+## Live Demo
 
-* Configuration
+[Live Demo Link](https://)
 
-* Database creation
+## Getting Started
 
-* Database initialization
+To get a local copy up and running follow these simple steps:
 
-* How to run the test suite
+- Git clone the repository.
+- Run `bundle install` to install all dependencies.
+- Run `rails s` to start the server.
 
-* Services (job queues, cache servers, search engines, etc.)
+## Authors
 
-* Deployment instructions
+👤 **Diego Yon**
 
-* ...
+- GitHub: [@diegoyon](https://github.com/diegoyon)
+- Twitter: [@diegoyon](https://twitter.com/diegoyon)
+- LinkedIn: [Diego Yon](https://www.linkedin.com/in/diego-yon/)
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](../../issues/).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- HelpJuice
+
+## 📝 License
+
+This project is [MIT](./LICENSE) licensed.
