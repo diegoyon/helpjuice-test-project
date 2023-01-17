@@ -2,6 +2,15 @@
 
 <h1>Articles</h1>
 
+<%= search_form_for @q do |f| %>
+
+  <%# # Search if the name field contains... %>
+  <%#= f.label :title_or_content_or_author_cont %>
+  <%= f.search_field :title_or_content_or_author_cont %>
+
+  <%= f.submit %>
+<% end %>
+
 <div id="articles">
   <% @articles.each do |article| %>
     <%= render article %>
