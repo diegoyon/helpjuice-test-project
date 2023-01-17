@@ -52,9 +52,11 @@ gem "bootsnap", require: false
 gem "faker"
 
 # Add ransack for the searchbar
-gem "ransack"
+# gem "ransack"
 
 gem "string-similarity"
+
+# gem "pg_search"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

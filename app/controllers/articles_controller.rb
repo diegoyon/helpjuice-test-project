@@ -7,8 +7,7 @@ class ArticlesController < ApplicationController
     # @articles = Article.all
 
     if params[:query].present?
-      @articles = Article.where("title LIKE ?", "#{params[:query]}%")
-    
+      @articles = Article.where("lower(title) LIKE ?", "%#{params[:query].downcase}%") + Article.where("lower(content) LIKE ?", "%#{params[:query].downcase}%") + Article.where("lower(author) LIKE ?", "%#{params[:query].downcase}%")
       create_query(params[:query]);
     else
       @articles = Article.all
@@ -85,7 +84,11 @@ class ArticlesController < ApplicationController
 
     def create_query(query)
       return unless query.length >= 3
-      last_query = Query.last
+      if Query.last
+        last_query = Query.last
+      else
+        last_query = Query.create!(body: query)
+      end
       similarity = String::Similarity.cosine last_query.body, query
       if similarity > 0.7
         last_query.update(body: query)
