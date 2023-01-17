@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Queries', type: :feature do
   before :each do
-    @user = User.create(email: 'test@gmail.com', password: 123456)
+    @user = User.create(email: 'test@gmail.com', password: 123_456)
     sign_in @user
     visit queries_index_path
   end
@@ -16,6 +16,5 @@ RSpec.feature 'Queries', type: :feature do
       expect(page).to have_content('Query')
       expect(page).to have_content('Instances')
     end
-    
   end
 end

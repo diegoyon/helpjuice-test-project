@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   subject do
-    User.new(email: "test@gmail.com", password: 123456)
+    User.new(email: 'test@gmail.com', password: 123_456)
   end
 
   context 'validations' do

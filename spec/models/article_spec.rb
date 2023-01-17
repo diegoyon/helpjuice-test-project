@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Article, type: :model do
   subject do
-    Article.new(title: "Test title", content: "Test content", author: "Test author")
+    Article.new(title: 'Test title', content: 'Test content', author: 'Test author')
   end
 
   context 'validations' do
@@ -24,6 +24,5 @@ RSpec.describe Article, type: :model do
       subject.author = nil
       expect(subject).to_not be_valid
     end
-
   end
 end

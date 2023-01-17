@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Query, type: :model do
   subject do
-    Query.new(body: "Test query", user_id: 1)
+    Query.new(body: 'Test query', user_id: 1)
   end
 
   context 'validations' do

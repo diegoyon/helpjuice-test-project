@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Articles', type: :feature do
   before :each do
-    @user = User.create(email: 'test@gmail.com', password: 123456)
+    @user = User.create(email: 'test@gmail.com', password: 123_456)
     sign_in @user
     visit articles_path
   end
@@ -24,6 +24,5 @@ RSpec.feature 'Articles', type: :feature do
       click_link 'New article'
       expect(page.body).to include('Create Article')
     end
-    
   end
 end
