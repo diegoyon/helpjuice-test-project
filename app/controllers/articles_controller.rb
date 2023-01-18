@@ -91,21 +91,14 @@ class ArticlesController < ApplicationController
     # if one of the conditions defined in the search_bar_controller are met
     return unless query.length >= 1 && save == "true"
 
+    # check if the last query was made within 10 seconds
+    # add to the database only if 10 seconds have already passed
+    # since the last search
     last_query = Query.where(user_id: current_user.id).last
     if last_query
-      return if last_query.body == query
+      return if last_query.created_at - DateTime.now > -10
     end
 
     Query.create!(body: query, user_id: current_user.id)
-    # create a last_query if there is nothing in the database
-    # last_query = Query.last || Query.create!(body: query, user_id: current_user.id)
-    
-    # # compare last_query with current query
-    # similarity = String::Similarity.cosine last_query.body, query
-    # if similarity > 0.7
-    #   last_query.update(body: query)
-    # else
-    #   Query.create!(body: query, user_id: current_user.id)
-    # end
   end
 end
