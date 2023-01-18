@@ -91,3 +91,6 @@ gem 'will_paginate'
 
 # gem for debugging
 gem 'pry'
+
+# gem for charts
+gem 'chartkick'
