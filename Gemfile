@@ -77,9 +77,6 @@ end
 # Add faker for the seeds
 gem 'faker'
 
-# gem to check for string similarities
-gem 'string-similarity'
-
 # gem for user authentication
 gem 'devise'
 
