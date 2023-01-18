@@ -3,14 +3,13 @@ class ArticlesController < ApplicationController
 
   # GET /articles or /articles.json
   def index
-
     # if there is a query, look for the word in the articles
     if params[:query].present?
       @articles = Article.where('lower(title) LIKE ?', "%#{params[:query].downcase}%")
       @articles |= Article.where('lower(content) LIKE ?', "%#{params[:query].downcase}%")
       @articles |= Article.where('lower(author) LIKE ?', "%#{params[:query].downcase}%")
-      # binding.pry                                                                        
-      # function to add a query or edit the last query                                                
+
+      # function to add a query or edit the last query
       create_query(params[:query].downcase, params[:save])
     else
       @articles = Article.all
@@ -89,15 +88,13 @@ class ArticlesController < ApplicationController
   def create_query(query, save)
     # check if the query is more than 1 character long and
     # if one of the conditions defined in the search_bar_controller are met
-    return unless query.length >= 1 && save == "true"
+    return unless query.length >= 1 && save == 'true'
 
     # check if the last query was made within 10 seconds
     # add to the database only if 10 seconds have already passed
     # since the last search
     last_query = Query.where(user_id: current_user.id).last
-    if last_query
-      return if last_query.created_at - DateTime.now > -10
-    end
+    return if last_query && (last_query.created_at - DateTime.now > -10)
 
     Query.create!(body: query, user_id: current_user.id)
   end
