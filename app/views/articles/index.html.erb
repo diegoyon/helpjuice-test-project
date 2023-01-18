@@ -13,7 +13,7 @@
     <%= render "articles", articles: @articles %>
   </div>
 
-  <%= will_paginate @articles %>
+  <%= will_paginate @articles, class: "container text-center fs-4" %>
 
-  <%= link_to "New article", new_article_path %>
+  <%= link_to "New article", new_article_path, class: "btn btn-secondary my-3" %>
 </div>
