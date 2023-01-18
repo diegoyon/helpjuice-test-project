@@ -1,6 +1,5 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[show edit update destroy]
-  require 'string/similarity'
 
   # GET /articles or /articles.json
   def index
@@ -12,7 +11,7 @@ class ArticlesController < ApplicationController
       @articles |= Article.where('lower(author) LIKE ?', "%#{params[:query].downcase}%")
       # binding.pry                                                                        
       # function to add a query or edit the last query                                                
-      create_query(params[:query].downcase)
+      create_query(params[:query].downcase, params[:save])
     else
       @articles = Article.all
     end
@@ -87,19 +86,26 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :content, :author)
   end
 
-  def create_query(query)
-    # only store queries with more than 3 characters
-    return unless query.length >= 3  
+  def create_query(query, save)
+    # check if the query is more than 1 character long and
+    # if one of the conditions defined in the search_bar_controller are met
+    return unless query.length >= 1 && save == "true"
 
-    # create a last_query if there is nothing in the database
-    last_query = Query.last || Query.create!(body: query, user_id: current_user.id)
-    
-    # compare last_query with current query
-    similarity = String::Similarity.cosine last_query.body, query
-    if similarity > 0.7
-      last_query.update(body: query)
-    else
-      Query.create!(body: query, user_id: current_user.id)
+    last_query = Query.where(user_id: current_user.id).last
+    if last_query
+      return if last_query.body == query
     end
+
+    Query.create!(body: query, user_id: current_user.id)
+    # create a last_query if there is nothing in the database
+    # last_query = Query.last || Query.create!(body: query, user_id: current_user.id)
+    
+    # # compare last_query with current query
+    # similarity = String::Similarity.cosine last_query.body, query
+    # if similarity > 0.7
+    #   last_query.update(body: query)
+    # else
+    #   Query.create!(body: query, user_id: current_user.id)
+    # end
   end
 end
