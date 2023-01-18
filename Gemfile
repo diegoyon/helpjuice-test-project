@@ -77,13 +77,17 @@ end
 # Add faker for the seeds
 gem 'faker'
 
-# Add ransack for the searchbar
-# gem "ransack"
-
+# gem to check for string similarities
 gem 'string-similarity'
 
-# gem "pg_search"
-
+# gem for user authentication
 gem 'devise'
 
+# gem for linters
 gem 'rubocop', '>= 1.0', '< 2.0'
+
+# gem for pagination
+gem 'will_paginate'
+
+# gem for debugging
+gem 'pry'
